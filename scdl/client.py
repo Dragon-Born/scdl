@@ -150,7 +150,7 @@ class Client:
             return self.db
         request = request.json()
         self.reformat(request, collection='normal')
-        return self.db
+        return self.db[:limit]
 
     def reformat(self, data, collection=None):
         for i in data['collection']:
