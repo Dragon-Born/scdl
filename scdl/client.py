@@ -37,7 +37,7 @@ def _fix_name(i):
     return artist, i['title'],
 
 
-def _download_file(url, file_name=None, path=None, auth=None):
+def _download_file(url, file_name=None, auth=None, path=None):
     local_filename = url.split('/')[-1] if not file_name else file_name
     if os.name == 'nt':
         v = "\\"
@@ -103,7 +103,7 @@ class Client:
         self.reformat(request, collection='new')
         return self.db
 
-    def download(self, track_id):
+    def download(self, track_id, path=None):
         get_links_url = self.url['download'].format(track_id, self.client_id)
         get_track = _req(self.url['track_info'].format(track_id, self.client_id), self.proxies)
         if get_track.status_code != 200:
@@ -121,7 +121,7 @@ class Client:
             url_to_download = get_links['http_mp3_128_url']
         else:
             url_to_download = get_links['preview_mp3_128_url']
-        path = _download_file(url_to_download, filename, self.auth)
+        path = _download_file(url_to_download, filename, self.auth, path=path)
         return path
 
     def search(self, **kwargs):
