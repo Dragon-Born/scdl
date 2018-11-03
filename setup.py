@@ -28,5 +28,6 @@ setup(
         'requests',
         'demjson',
         'requests',
+        'pysocks',
     ]
 )
