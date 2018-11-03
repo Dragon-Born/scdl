@@ -67,7 +67,7 @@ def _download_file(url, file_name=None, auth=None, path=None):
 
 
 def fix(title):
-    title = re.sub(r' [(\[].+ Remix[)\]]', '', title)
+    #title = re.sub(r' [(\[].+ Remix[)\]]', '', title)
     title = re.sub(r' [(\[]By .+[)\]]', '', title)
     title = re.sub(r' [(\[].+ Track[)\]]', '', title)
     return title
@@ -170,8 +170,8 @@ class Client:
                             i['user']['username']
                     date = dateutil.parse(i['release_date']).date() if i['release_date'] \
                         else dateutil.parse(i['display_date']).date()
-                    if 'Remix' in artist or 'Remix' in i['title']:
-                        continue
+                    #if 'Remix' in artist or 'Remix' in i['title']:
+                    #    continue
                     genre = i['genre']
                     duration = i['full_duration'] // 1000 if i['full_duration'] else None
                     i['title'] = fix(i['title'])
